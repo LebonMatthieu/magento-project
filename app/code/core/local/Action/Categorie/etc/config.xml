@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Action_Categorie>
+            <version>0.1.0</version>
+        </Action_Categorie>
+    </modules>
+    <global>
+        <blocks>
+            <Categorie>
+                <class>Action_Categorie_Block</class>
+            </Categorie>
+        </blocks>
+        <helpers>
+            <Categorie>
+                <class>Action_Categorie_Helper</class>
+            </Categorie>
+        </helpers>
+    </global>
+</config>

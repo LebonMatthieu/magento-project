@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<widgets>
+    <Categorie_addcategorie type="Categorie/addcategorie">
+        <name>CAtegorie</name>
+        <description type="desc">Lists categorie</description>
+    </Categorie_addcategorie>
+</widgets>
