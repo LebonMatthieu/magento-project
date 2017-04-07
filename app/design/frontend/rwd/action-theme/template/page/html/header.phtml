@@ -27,20 +27,6 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
-<!--
-<div class="header-language-background">
-    <div class="header-language-container">
-        <div class="store-language-container">
-            <?php echo $this->getChildHtml('store_language') ?>
-            Nouveau header
-        </div>
-
-        <?php echo $this->getChildHtml('currency_switcher') ?>
-
-        <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getChildHtml('accountLinks') ?></p>
-    </div>
-</div>
--->
 <header id="header" class="page-header">
     <div class="page-header-container">
         <div id="nav-icon3">
@@ -64,13 +50,13 @@
         <div class="skip-links">
             <a href="#header-nav" class="skip-link skip-nav">
                 <span class="icon"></span>
-                <!-- <span class="label"><?php echo $this->__('Menu'); ?></span> -->
+                <span class="label"><?php echo $this->__('Menu'); ?></span>
             </a>
                 <ul class="account-cart-wrapper">
                     <li>
                         <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
                             <span class="icon"></span>
-                            <!--  <span class="label"><?php echo $this->__('Account'); ?></span> -->
+                            <span class="label"></span>
                         </a>
                     </li>
                     <li>
@@ -91,6 +77,24 @@
         -->
     </div>
 </header>
+<div class="mg-menu">
 
+    <a style="cursor: pointer;" href="<?php echo Mage::getModel('catalog/category')->load(4)->getUrl(); ?> ">
+    <div class="mg-menu_element"  style="background-image: url(<?php echo $this->getSkinUrl('images/navbg-marvel.jpg'); ?>)">
+        <div class="mg-menu_element_block mg-menu_element_marvel">
+            <img class="mg-menu_element_block_image" src="<?php echo $this->getSkinUrl('images/marvel-logo.png'); ?>" alt="">
+        </div>
+    </div>
+    </a>
+
+    <a style="cursor: pointer;" href="<?php echo Mage::getModel('catalog/category')->load(3)->getUrl(); ?> ">
+    <div class="mg-menu_element" style="background-image: url(<?php echo $this->getSkinUrl('images/navbg-dc.jpg'); ?>)">
+        <div class="mg-menu_element_block mg-menu_element_dc">
+            <img src="<?php echo $this->getSkinUrl('images/dclogo.png'); ?>" style="width: 100px" alt="">
+        </div>
+    </div>
+    </a>
+
+</div>
 
 <?php echo $this->getChildHtml('topContainer'); ?>

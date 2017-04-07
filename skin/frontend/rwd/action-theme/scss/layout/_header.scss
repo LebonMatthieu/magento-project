@@ -103,6 +103,10 @@
     }
     #header{
       height: 70px;
+
+      @include breakpoint(to-tablet) {
+        display: block !important;
+      }
     }
     .page-header {
         /*max-width: $max-container-width; */

@@ -1278,5 +1278,24 @@ $j(document).ready(function() {
 
     $j('#nav-icon3').on( 'click', function(){
         $j(this).toggleClass('open');
+        $j('.mg-menu').slideToggle();
+
+        if($j(this).hasClass('open')){
+            $j('.mg-overlay').css('display','block');
+        }else{
+            $j('.mg-overlay').css('display','none');
+        }
+
     });
+
+    $j('.btn.open-popup').on('click',function () {
+        $j('#popup_product').fadeIn();
+    })
+    $j('.close-popup').on('click' , function () {
+        $j('#popup_product').fadeOut();
+    })
+
+    $j('#search_mini_form').mouseenter(function () {
+        $j('input#search').addClass('active');
+    })
 });

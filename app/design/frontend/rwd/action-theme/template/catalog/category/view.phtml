@@ -1,0 +1,79 @@
+<?php
+$_category  = $this->getCurrentCategory();
+$collection = Mage::getModel('catalog/category')->getCategories($_category->entity_id);
+$helper     = Mage::helper('catalog/category');
+?>
+
+<?php if($_category->getUrlKey() == 'dcomic' || $_category->getUrlKey() == 'marvel') : ?>
+    <div class="mg-category">
+        <?php foreach ($collection as $cat):?>
+            <?php if($_category->getIsActive()):?>
+                <?php
+                $cur_category = Mage::getModel('catalog/category')->load($cat->getId());
+                $_img = $cur_category->getImageUrl();
+                ?>
+                <div class="mg-category_child" style="background-image: url(<?php echo $_img?>)">
+                    <div class="mg-category_child_block">
+                        <div class="mg-category_child_content">
+                            <h2 class="mg-category_child_content_name"><?php echo $cat->getName();?></h2>
+                            <h3 class="mg-category_child_content_group"><?php echo $_category->getName() ?></h3>
+                            <a class="mg-category_child_content_button" href="<?php echo $helper->getCategoryUrl($cat);?>">
+                                Shop now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endif?>
+        <?php endforeach;?>
+    </div>
+<?php endif; ?>
+<?php
+$a = $_category->getProductCollection()->addAttributeToSort('position');
+    if( $_category->getUrlKey() != 'dcomic' ){
+        if( $_category->getUrlKey() != 'marvel' ){
+            if (count($a) > 0) { ?>
+                <?php
+                $model = Mage::getModel('catalog/product'); //getting product model
+                ?>
+                <div class="mg-product">
+                    <div class="mg-product_header">
+                        <h1 class="mg-product_header_title"><?php echo $_category->getName() ?></h1>
+                        <div class="mg-product_header_subtitle">
+                            <?php echo $_category->getDescription() ?>
+                        </div>
+                    </div>
+                    <div class="mg-product_content">
+                        <div class="mg-product_content_block">
+
+                        <?php foreach ($a as $product) { ?>
+                            <?php
+                            $_product = $model->load($product->getId());
+                            ?>
+                            <a style="width: 100%;" href="<?php echo $product->getProductUrl() ?>">
+                            <div class="mg-product_content_block_element"
+                                 style="background-image: url(<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->keepFrame(false)->resize(300)->setQuality(100);?>)">
+                                <div class="mg-product_content_block_content">
+
+                                    <div class="mg-product_content_block_details">
+                                            <h2 style="color: #fff;" class="mg-product_content_block_details_title"><?php echo $_product->getName(); ?></h2>
+                                            <h3 style="color: #fff;" class="mg-product_content_block_details_subtitle">Premium</h3>
+                                            <h4 style="color: #fff;" class="mg-product_content_block_details_price">
+                                                <?php
+                                                    echo Mage::helper('core')->currency($_product->getPrice());
+                                                ?>
+                                            </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+
+                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } else {
+                echo 'Il n\' y a pas d\'article';
+            }
+        }
+    }
+?>

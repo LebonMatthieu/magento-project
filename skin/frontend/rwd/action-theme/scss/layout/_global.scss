@@ -62,15 +62,20 @@ BREAKPOINTS
 }
 .mg-home {
     width: 100%;
-    height: calc(100vh - 70px);
-    //display: flex;
+    height: 100%;
 
     &_element {
         width: 50%;
-        height: 100vh;
+        height: calc(100vh - 70px);
         background-size: cover;
         display: inline-block;
         float: left;
+
+        @include breakpoint(to-tablet) {
+            float: none;
+            width: 100%;
+            height: 400px;
+        }
 
         &_block {
             width: 100%;
@@ -91,6 +96,12 @@ BREAKPOINTS
 
             }
 
+            img {
+                @include breakpoint(to-tablet) {
+                    width: 140px
+                }
+            }
+
             &_image {
                 width: 300px;
             }
@@ -102,6 +113,181 @@ BREAKPOINTS
         &_dc {
             background-color: rgba(7, 28, 80, 0.71);
         }
+    }
+}
+.btn.open-popup{
+    margin: 35px 0;
+    color: red;
+    font-weight: bold;
+    display: block;
+}
+.button.btn-cart{
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: red !important;
+    text-transform: lowercase;
+    margin: 35px 0 45px;
+}
+.mg-home_element_marvel{
+    .widget.widget-category-link{
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        a{
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            span{
+                display: none;
+            }
+        }
+    }
+}
+.widget.widget-category-link{
+
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    a{
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        span{
+            display: none;
+        }
+    }
+}
+#popup_product{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+
+    .popup-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50% , -50%);
+        -moz-transform: translate(-50% , -50%);
+        -ms-transform: translate(-50% , -50%);
+        -o-transform: translate(-50% , -50%);
+        transform: translate(-50% , -50%);
+        width: 80%;
+        height: 80%;
+        background-color: #fff;
+        z-index: 1;
+
+    }
+    .popup-content-value{
+        padding: 20px 40px;
+        width: 50%;
+
+        @include breakpoint(mobile) {
+            width:100%;
+        }
+        @include breakpoint(from-tablet) {
+            width:100%;
+        }
+    }
+    .popup-overlay {
+        background: rgba(0,0,0,0.9);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .popup-header{
+        h1{
+            color: #000 !important;
+            font-size: 48px !important;
+            margin-bottom: 0;
+            display: inline-block;
+            text-transform: capitalize;
+
+            @include breakpoint(mobile) {
+                font-size: 24px !important;
+            }
+            @include breakpoint(from-tablet) {
+                font-size: 24px !important;
+            }
+        }
+        .close-popup{
+            color: #000 !important;
+            font-size: 48px !important;
+            float: right;
+            margin-top: -11px;
+            
+            &:hover{
+                text-decoration: none;
+            }
+
+            @include breakpoint(mobile) {
+                font-size: 24px !important;
+            }
+            @include breakpoint(from-tablet) {
+                font-size: 24px !important;
+            }
+        }
+        padding: 20px 40px;
+        border-bottom: 3px solid #e4e4e4;
+        width: 100%;
+    }
+    .attribute-list{
+        width: 50%;
+
+        @include breakpoint(mobile) {
+            width: 100%;
+        }
+        @include breakpoint(from-tablet) {
+            width: 100%;
+        }
+        li{
+            padding: 8px 0;
+        }
+    }
+}
+#search_mini_form{
+    input#search{
+        width: 0;
+        background: transparent;
+        border: none;
+
+        &.active{
+            width: 100%;
+            border-bottom: 1px solid #fff;
+            box-shadow: none;
+            outline: 0;
+        }
+    }
+
+    &:hover
+    {
+        input#search{
+            width: 100%;
+            border-bottom: 1px solid #fff;
+            box-shadow: none;
+            outline: 0;
+        }
+    }
+}
+a{
+    &:hover{
+        text-decoration: none;
     }
 }
 body.cms-home .main-container{
@@ -165,6 +351,7 @@ body.cms-home .main-container{
                         color: white;
                         font-size: 35px;
                         font-weight: bold;
+                        margin-bottom: 0;
                     }
 
                     .mg-category_child_content_group {
@@ -183,6 +370,8 @@ body.cms-home .main-container{
                         border: 2px solid white;
                         padding: 7px 29px;
                         font-size: 15px;
+                        display: inline-block;
+                        box-sizing: border-box;
                     }
 
                 }
@@ -201,6 +390,7 @@ body.cms-home .main-container{
                 color: black;
                 font-size: 35px;
                 font-weight: bold;
+                margin-bottom: 0;
 
                 @include breakpoint(to-tablet) {
                     color: white;
@@ -228,9 +418,11 @@ body.cms-home .main-container{
                 border: 2px solid black;
                 padding: 7px 29px;
                 font-size: 15px;
+                display: inline-block;
+                box-sizing: border-box;
 
                 @include breakpoint(to-tablet) {
-                    color: black;
+                    color: white;
                     border: 2px solid white;
                 }
             }
@@ -285,7 +477,7 @@ body.cms-home .main-container{
             }
 
             &_element {
-                width: calc(100% / 3);
+                width: 400px;
                 height: 400px;
                 background-size: cover;
 
@@ -348,20 +540,25 @@ body {
 .ml-product-col-left,
 .ml-product-col-right{
     float: left;
+    @include breakpoint(to-tablet) {
+        float: none;
+    }
 }
 
 .ml-product-col-left{
-    background: red;
     width: 70%;
-    min-height: 800px;
+    height: calc(100vh - 70px);
+    @include breakpoint(to-tablet) {
+        width: 100%;
+    }
 }
 .ml-product-col-right{
-    background: yellow;
     width: 30%;
-    height: auto;
-    min-height: calc(100vh - 70px);
+    height: calc(100vh - 70px);
     padding: 50px 30px;
-
+    @include breakpoint(to-tablet) {
+        width: 100%;
+    }
     .product-img-box{
         width: 100%;
 
@@ -409,4 +606,65 @@ body {
 }
 .main-container{
     padding: 0;
+    position: relative;
+}
+.mg-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba( 0, 0, 0, .5);
+    display: none;
+    z-index: 1;
+
+}
+.mg-menu {
+    z-index: 2;
+    width: 100%;
+    height: 239px;
+    display: none;
+
+    &.open{
+        display: block;
+    }
+    &_element {
+        width: 50%;
+        height: 100%;
+        background-size: cover;
+        display: inline-block;
+        float: left;
+
+        @include breakpoint(to-tablet) {
+            float: none;
+            width: 100%;
+            height: 200px;
+        }
+
+        &_block {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            transition: all 0.8s ease;
+
+            img {
+                @include breakpoint(to-tablet) {
+                    width: 140px
+                }
+            }
+
+            &_image {
+                width: 140px;
+            }
+        }
+
+        &_marvel {
+            background-color: rgba(115, 7, 7, 0.54);
+        }
+        &_dc {
+            background-color: rgba(7, 28, 80, 0.71);
+        }
+    }
 }

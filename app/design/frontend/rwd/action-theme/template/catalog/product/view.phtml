@@ -38,7 +38,7 @@
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
 <div class="product-view">
-    <div class="ml-product-col-left">
+    <div class="ml-product-col-left" style="background: url(<?php echo  Mage::helper('catalog/image')->init($_product, 'thumbnail'); ?>) center; -webkit-background-size:cover;background-size: cover;">
     </div>
     <div class="ml-product-col-right">
         <div class="product-name">
@@ -51,23 +51,54 @@
         <div class="product-description">
             <?php echo $this->getChildHtml('description'); ?>
         </div>
+
+        <a href="#" class="btn open-popup">Voir les spécificités techniques</a>
+
+        <div id="popup_product" class="popup">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <a href="#" class="close-popup">&times;</a>
+                </div>
+                <?php
+                /* $detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml');
+                echo $detailedInfoGroup['additional']; */
+
+                $attributes = $_product->getAttributes();
+                ?>
+                <div class="popup-content-value">
+                    <ul class="attribute-list">
+                        <?php
+                        foreach ($attributes as $attribute) {
+                            if ($attribute->getIsVisibleOnFront()) {
+                                $attributeCode = $attribute->getAttributeCode();
+                                $label = $attribute->getFrontend()->getLabel($_product);
+                                $value = $attribute->getFrontend()->getValue($_product);
+                                if(!$value){
+                                    $value = "N/A";
+                                }
+                                /* echo $attributeCode . '-' . $label . '-' . $value; echo "<br />"; */
+                                ?>
+                                <li><span style="font-weight: bold;color: #000; width: 140px;display: inline-block;"><?php echo $label; ?> :</span><span><?php echo $value; ?></span></li>
+                            <?php }
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup-overlay"></div>
+        </div>
         <div class="price-info">
             <?php echo $this->getPriceHtml($_product); ?>
             <?php echo $this->getChildHtml('bundle_prices') ?>
             <?php echo $this->getTierPriceHtml() ?>
         </div>
-        <div class="add-to-cart-wrapper">
-            <?php echo $this->getChildHtml('product_type_data') ?>
-            <?php echo $this->getChildHtml('extrahint') ?>
 
-            <?php if (!$this->hasOptions()):?>
-                <div class="add-to-box">
-                    <?php if($_product->isSaleable()): ?>
-                        <?php echo $this->getChildHtml('addtocart') ?>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-        </div>
+        <?php if($_product->isSaleable()): ?>
+            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button><br>
+        <?php else: ?>
+            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+        <?php endif; ?>
 
         <div class="product-img-box">
             <?php $_images = Mage::getModel('catalog/product')->load($_product->getId())->getMediaGalleryImages(); ?>
@@ -78,6 +109,7 @@
         </div>
 
     </div>
+
     <!--
     <div class="product-essential">
         <form action="<?php echo $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure())) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
